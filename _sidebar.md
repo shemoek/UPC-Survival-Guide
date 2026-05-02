@@ -1,6 +1,3 @@
 - [首页](README)
-- [荷悦里篇](heyueli)
-- [康大篇](kangda)
-- [好望角篇](haowangjiao)
-- [城发悦邻广场篇](yulin)
-- [剧本杀&桌游](zhuoyou)
+- [体育篇](体育/体育篇)
+
