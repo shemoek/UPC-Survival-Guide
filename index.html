@@ -8,37 +8,25 @@
 </head>
 <body>
   <div id="app"></div>
-  
-  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
-  
-<script>
-window。$docsify = {
-    name: '石大生存指南',
-    loadSidebar: true,
-    alias: {
+  <script>
+    window.$docsify = {
+      name: '石大生存指南',
+      loadSidebar: true,
+      alias: {
         '/.*/_sidebar.md': '/_sidebar.md'
-    },
-    subMaxLevel: 2,
-    auto2top: true,
-    
-    // 👇 1. 你的 Cusdis 原始配置，我们保留在这里
-    cusdis: {
+      },
+      subMaxLevel: 2,
+      auto2top: true,
+      // 👇 评论系统配置
+      cusdis: {
+        appId: '15d36221-e8cc-4506-b2d5-fc79253e71d8', // 你的 appId
         host: 'https://cusdis.com',
-        appId: '15d36221-e8cc-4506-b2d5-fc79253e71d8'
-    },
-    
-    // 👇 2. 这里是解决问题的“手动导航”插件
-    plugins: [
-        function(hook) {
-            hook.doneEach(function() {
-                // 这一句的作用是，当每次进入一个页面，就试着去“唤醒”Cusdis的评论框
-                if (window.renderCusdis) {
-                    window.renderCusdis();
-                }
-            });
-        }
-    ]
-};
-</script>
+        lang: 'zh-cn'
+      }
+    }
+  </script>
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <!-- 一定要用这一个插件即可 -->
+  <script src="https://cusdis.com/js/cusdis.docsify.js"></script>
 </body>
 </html>
