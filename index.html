@@ -11,29 +11,34 @@
   
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
   
-  <!-- Cusdis 插件文件 -->
-  <script src="https://cusdis.com/js/cusdis.docsify.js"></script>
-  
-  <script>
-    window.$docsify = {
-      // 网站名称（左上角显示）
-      name: '石大生存指南',
-      // 开启侧边栏：自动读取根目录的 _sidebar.md 文件
-      loadSidebar: true,
-      // 所有页面共用同一个侧边栏
-      alias: {
+<script>
+window。$docsify = {
+    name: '石大生存指南',
+    loadSidebar: true,
+    alias: {
         '/.*/_sidebar.md': '/_sidebar.md'
-      },
-      // 页面标题跟随内容切换
-      subMaxLevel: 2,
-      // 自动显示目录层级
-      auto2top: true,
-      // 👇 新增：Cusdis 配置
-      cusdis: {
+    },
+    subMaxLevel: 2,
+    auto2top: true,
+    
+    // 👇 1. 你的 Cusdis 原始配置，我们保留在这里
+    cusdis: {
         host: 'https://cusdis.com',
         appId: '15d36221-e8cc-4506-b2d5-fc79253e71d8'
-      }
-    }
-  </script>
+    },
+    
+    // 👇 2. 这里是解决问题的“手动导航”插件
+    plugins: [
+        function(hook) {
+            hook.doneEach(function() {
+                // 这一句的作用是，当每次进入一个页面，就试着去“唤醒”Cusdis的评论框
+                if (window.renderCusdis) {
+                    window.renderCusdis();
+                }
+            });
+        }
+    ]
+};
+</script>
 </body>
 </html>
