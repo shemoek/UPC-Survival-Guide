@@ -4,37 +4,43 @@
   <meta charset="UTF-8">
   <title>石大生存指南</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- docsify 主题 css -->
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
-  <!-- Artalk 评论区样式 -->
+  <!-- Artalk 评论区 css -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/artalk/dist/Artalk.css">
 </head>
 <body>
+  <!-- Docsify 内容容器 -->
   <div id="app"></div>
-
-  <!-- 评论区容器，一般放在页面底部 -->
+  <!-- 评论容器（可置于页面底部）-->
   <div id="Comments"></div>
 
+  <!-- docsify 主 js -->
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
-  <!-- Artalk 评论功能脚本 -->
+  <!-- Artalk 评论组件 js -->
   <script src="https://cdn.jsdelivr.net/npm/artalk/dist/Artalk.js"></script>
+
   <script>
+    // Docsify 配置
     window.$docsify = {
       name: '石大生存指南',
       loadSidebar: true,
-      alias: { '/.*/_sidebar.md': '/_sidebar.md' },
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md'
+      },
       subMaxLevel: 2,
       auto2top: true,
-    }
+    };
 
-    // Artalk 评论系统配置，server 指向官方演示云服务
+    // Artalk 评论区配置
     new Artalk({
       el: '#Comments',
-      pageKey: location.pathname,
-      pageTitle: document.title,
-      server: 'https://artalk-demo.js.org', // 官方云服务地址！如后期需要自管数据可迁移
       site: '石大生存指南',
+      pageKey: location.hash,            // 使用 hash 作为页面唯一键
+      pageTitle: document.title,
+      server: 'https://artalk-demo.js.org', // 【可用】官方演示云服务，测试ok，建议你部署自己后端更安全
       useBackendConf: false
-    })
+    });
   </script>
 </body>
 </html>
