@@ -6,24 +6,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/artalk/dist/Artalk.css">
+  <style>
+    /* 保证评论区宽度与正文一致并适当留白 */
+    .artalk-main {
+      max-width: 800px;
+      margin: 2em auto;
+    }
+  </style>
 </head>
 <body>
   <div id="app"></div>
-  <div id="Comments"></div>
+  <!-- 不要在这里写 <div id="Comments"></div> -->
+
   <script src="https://cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/artalk/dist/Artalk.js"></script>
   <script>
     window.$docsify = {
       name: '石大生存指南',
       loadSidebar: true,
-      alias: { '/.*/_sidebar.md': '/_sidebar.md' },
+      alias: {'/.*/_sidebar.md': '/_sidebar.md'},
       subMaxLevel: 2,
       auto2top: true,
       plugins: [
-        function (hook, vm) {
+        function(hook, vm) {
           hook.doneEach(function() {
-            // 兼容 Artalk v2 CDN 用法
-            if (window.artalkIns) window.artalkIns.destroy()
+            // 1. 插入评论区容器到正文下方
+            var main = document.querySelector('.content');
+            if (main) {
+              let c = document.getElementById('Comments');
+              if (c) c.remove(); // 清理残留
+              c = document.createElement('div');
+              c.id = 'Comments';
+              main.appendChild(c);
+            }
+            // 2. 初始化 Artalk
+            if (window.artalkIns) window.artalkIns.destroy();
             window.artalkIns = window.Artalk.init({
               el: '#Comments',
               site: '石大生存指南',
@@ -31,11 +48,11 @@
               pageTitle: document.title,
               server: 'https://artalk-demo.js.org',
               useBackendConf: false
-            })
-          })
+            });
+          });
         }
       ]
-    }
+    };
   </script>
 </body>
 </html>
