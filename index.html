@@ -5,28 +5,36 @@
   <title>石大生存指南</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+  <!-- Artalk 评论区样式 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/artalk/dist/Artalk.css">
 </head>
 <body>
   <div id="app"></div>
+
+  <!-- 评论区容器，一般放在页面底部 -->
+  <div id="Comments"></div>
+
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <!-- Artalk 评论功能脚本 -->
+  <script src="https://cdn.jsdelivr.net/npm/artalk/dist/Artalk.js"></script>
   <script>
     window.$docsify = {
       name: '石大生存指南',
       loadSidebar: true,
-      alias: {
-        '/.*/_sidebar.md': '/_sidebar.md'
-      },
+      alias: { '/.*/_sidebar.md': '/_sidebar.md' },
       subMaxLevel: 2,
       auto2top: true,
-      // 👇 评论系统配置
-      cusdis: {
-        appId: '15d36221-e8cc-4506-b2d5-fc79253e71d8', // 你的 appId
-        host: 'https://cusdis.com',
-        lang: 'zh-cn'
-      }
     }
+
+    // Artalk 评论系统配置，server 指向官方演示云服务
+    new Artalk({
+      el: '#Comments',
+      pageKey: location.pathname,
+      pageTitle: document.title,
+      server: 'https://artalk-demo.js.org', // 官方云服务地址！如后期需要自管数据可迁移
+      site: '石大生存指南',
+      useBackendConf: false
+    })
   </script>
-  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
-  <!-- 一定要用这一个插件即可 -->
-  <script src="https://cusdis.com/js/cusdis.docsify.js"></script>
 </body>
 </html>
