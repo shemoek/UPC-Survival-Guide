@@ -4,42 +4,38 @@
   <meta charset="UTF-8">
   <title>石大生存指南</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- docsify 主题 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
-  <!-- Artalk 评论区样式 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/artalk/dist/Artalk.css">
 </head>
 <body>
-  <!-- Docsify 挂载点 -->
   <div id="app"></div>
-  <!-- 评论区容器 (必须放 app 下面)-->
   <div id="Comments"></div>
-
-  <!-- docsify 主JS -->
   <script src="https://cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-  <!-- Artalk 评论JS -->
   <script src="https://cdn.jsdelivr.net/npm/artalk/dist/Artalk.js"></script>
   <script>
-    // Docsify 配置
     window.$docsify = {
       name: '石大生存指南',
       loadSidebar: true,
-      alias: {
-        '/.*/_sidebar.md': '/_sidebar.md'
-      },
+      alias: { '/.*/_sidebar.md': '/_sidebar.md' },
       subMaxLevel: 2,
       auto2top: true,
-    };
-
-    // Artalk 配置
-    new Artalk({
-      el: '#Comments',
-      site: '石大生存指南',
-      pageKey: location.hash,     // 兼容单页面路由
-      pageTitle: document.title,
-      server: 'https://artalk-demo.js.org',  // 先用官方体验，如果自建就换成你的 server
-      useBackendConf: false
-    });
+      plugins: [
+        function (hook, vm) {
+          hook.doneEach(function() {
+            // 兼容 Artalk v2 CDN 用法
+            if (window.artalkIns) window.artalkIns.destroy()
+            window.artalkIns = window.Artalk.init({
+              el: '#Comments',
+              site: '石大生存指南',
+              pageKey: location.hash,
+              pageTitle: document.title,
+              server: 'https://artalk-demo.js.org',
+              useBackendConf: false
+            })
+          })
+        }
+      ]
+    }
   </script>
 </body>
 </html>
