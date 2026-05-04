@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>石大生存指南</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Docsify 主题 -->
+  <!-- docsify 主题 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
   <!-- Artalk 评论区样式 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/artalk/dist/Artalk.css">
@@ -12,14 +12,15 @@
 <body>
   <!-- Docsify 挂载点 -->
   <div id="app"></div>
-  <!-- 评论区容器（必须放 #app 下面）-->
+  <!-- 评论区容器 (必须放 app 下面)-->
   <div id="Comments"></div>
 
-  <!-- Docsify 核心 -->
+  <!-- docsify 主JS -->
   <script src="https://cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-  <!-- Artalk 评论区核心 -->
+  <!-- Artalk 评论JS -->
   <script src="https://cdn.jsdelivr.net/npm/artalk/dist/Artalk.js"></script>
   <script>
+    // Docsify 配置
     window.$docsify = {
       name: '石大生存指南',
       loadSidebar: true,
@@ -30,13 +31,13 @@
       auto2top: true,
     };
 
-    // 用 location.hash 能兼容 docsify 单页应用路由
+    // Artalk 配置
     new Artalk({
       el: '#Comments',
       site: '石大生存指南',
-      pageKey: location.hash, // 或 location.pathname+location.hash
+      pageKey: location.hash,     // 兼容单页面路由
       pageTitle: document.title,
-      server: 'https://你的-artalk-server.vercel.app', // 先用 https://artalk-demo.js.org 测试
+      server: 'https://artalk-demo.js.org',  // 先用官方体验，如果自建就换成你的 server
       useBackendConf: false
     });
   </script>
