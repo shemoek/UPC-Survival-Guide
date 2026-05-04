@@ -4,24 +4,22 @@
   <meta charset="UTF-8">
   <title>石大生存指南</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- docsify 主题 css -->
-  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
-  <!-- Artalk 评论区 css -->
+  <!-- Docsify 主题 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+  <!-- Artalk 评论区样式 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/artalk/dist/Artalk.css">
 </head>
 <body>
-  <!-- Docsify 内容容器 -->
+  <!-- Docsify 挂载点 -->
   <div id="app"></div>
-  <!-- 评论容器（可置于页面底部）-->
+  <!-- 评论区容器（必须放 #app 下面）-->
   <div id="Comments"></div>
 
-  <!-- docsify 主 js -->
-  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
-  <!-- Artalk 评论组件 js -->
+  <!-- Docsify 核心 -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <!-- Artalk 评论区核心 -->
   <script src="https://cdn.jsdelivr.net/npm/artalk/dist/Artalk.js"></script>
-
   <script>
-    // Docsify 配置
     window.$docsify = {
       name: '石大生存指南',
       loadSidebar: true,
@@ -32,13 +30,13 @@
       auto2top: true,
     };
 
-    // Artalk 评论区配置
+    // 用 location.hash 能兼容 docsify 单页应用路由
     new Artalk({
       el: '#Comments',
       site: '石大生存指南',
-      pageKey: location.hash,            // 使用 hash 作为页面唯一键
+      pageKey: location.hash, // 或 location.pathname+location.hash
       pageTitle: document.title,
-      server: 'https://artalk-demo.js.org', // 【可用】官方演示云服务，测试ok，建议你部署自己后端更安全
+      server: 'https://你的-artalk-server.vercel.app', // 先用 https://artalk-demo.js.org 测试
       useBackendConf: false
     });
   </script>
